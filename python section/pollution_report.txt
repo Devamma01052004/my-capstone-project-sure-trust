@@ -1,0 +1,9 @@
+
+INDIA POLLUTION REPORT
+Date             : 30-05-2026
+Average AQI      : 163.74
+Most Polluted City   : Ahmedabad
+Cleanest City        : Aizawl
+Most Polluted River  : Yamuna
+Top Polluting Sector : Manufacturing
+Worst Season         : Winter
