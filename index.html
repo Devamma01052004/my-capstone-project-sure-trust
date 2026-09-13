@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CPCB Real-Time AQI Pipeline — Devamma | SURE Trust Capstone</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="wrap header-row">
+    <span class="wordmark">AQI&nbsp;Pipeline</span>
+    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+    <nav class="site-nav" id="siteNav">
+      <a href="#overview">Overview</a>
+      <a href="#why">Why it matters</a>
+      <a href="#pipeline">Pipeline</a>
+      <a href="#data">Data</a>
+      <a href="#about">About</a>
+      <a href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+
+  <section class="hero wrap">
+    <div class="hero-copy">
+      <p class="kicker"><span class="pulse-dot"></span>SURE Trust · Data Analytics Capstone</p>
+      <h1>Tracking India's air, one daily pull at a time.</h1>
+      <p class="lede">
+        A growing dataset built by merging live Air Quality Index snapshots from the
+        Central Pollution Control Board, station by station, day by day, toward a
+        master file large enough to analyse real seasonal and regional pollution trends.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">View the repository</a>
+        <a class="btn btn-ghost" href="#pipeline">See how it's built</a>
+      </div>
+    </div>
+
+    <div class="hero-dial">
+      <svg viewBox="0 0 220 220" class="dial-svg" aria-hidden="true">
+        <circle cx="110" cy="110" r="92" class="dial-track"></circle>
+        <circle cx="110" cy="110" r="92" class="dial-fill" id="dialFill"></circle>
+      </svg>
+      <div class="dial-readout">
+        <span class="dial-number" id="dialNumber">0</span>
+        <span class="dial-label">sample AQI reading</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview" class="section wrap reveal">
+    <h2>What this project does</h2>
+    <p class="section-lede">
+      Real-time AQI resources publish only a single current snapshot per city — there's
+      no ready-made historical archive to analyse. This project closes that gap by pulling
+      the live data.gov.in AQI feed on a regular cadence and appending each pull to one
+      continuously growing master dataset, rather than relying on a static one-time download.
+    </p>
+  </section>
+
+  <section id="why" class="section wrap reveal">
+    <h2>Why it matters</h2>
+    <div class="insight-grid">
+      <div class="insight-card">
+        <svg class="insight-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#4FA8A0" stroke-width="2"/><path d="M12 21l5 5 11-11" fill="none" stroke="#4FA8A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>No historical archive exists</h3>
+        <p>The public feed only ever shows "right now" — anyone wanting a trend has to build the history themselves.</p>
+      </div>
+      <div class="insight-card">
+        <svg class="insight-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#E8A33D" stroke-width="2"/><path d="M20 11v10l7 4" fill="none" stroke="#E8A33D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Time-series unlocks real analysis</h3>
+        <p>Seasonal spikes, weekday-weekend shifts and city comparisons only surface once enough days are stacked up.</p>
+      </div>
+      <div class="insight-card">
+        <svg class="insight-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C1543C" stroke-width="2"/><path d="M20 13v9m0 5h.01" fill="none" stroke="#C1543C" stroke-width="2" stroke-linecap="round"/></svg>
+        <h3>Air quality is a public health signal</h3>
+        <p>A clean, growing dataset makes it possible to connect pollutant levels back to real everyday exposure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="pipeline" class="section wrap reveal">
+    <h2>How the data is collected</h2>
+    <ol class="pipeline-list">
+      <li>
+        <span class="pipeline-index">01</span>
+        <div>
+          <h3>Pull the live snapshot</h3>
+          <p>Fetch the current CPCB real-time AQI resource from data.gov.in, covering monitoring stations across Indian cities at that moment.</p>
+        </div>
+      </li>
+      <li>
+        <span class="pipeline-index">02</span>
+        <div>
+          <h3>Clean &amp; timestamp</h3>
+          <p>Standardise station names, pollutant fields and units, and tag every row with its pull date so each snapshot stays traceable.</p>
+        </div>
+      </li>
+      <li>
+        <span class="pipeline-index">03</span>
+        <div>
+          <h3>Merge into the master file</h3>
+          <p>Append the cleaned snapshot to the running dataset, building toward 10,000+ rows of genuine time-series coverage.</p>
+        </div>
+      </li>
+      <li>
+        <span class="pipeline-index">04</span>
+        <div>
+          <h3>Analyse &amp; visualise</h3>
+          <p>Explore trends across cities and pollutants using SQL and Python, then surface the findings in Power BI dashboards.</p>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section id="data" class="section wrap reveal">
+    <h2>Dataset at a glance</h2>
+    <div class="stat-grid">
+      <div class="stat-card">
+        <span class="stat-value">10,000+</span>
+        <span class="stat-caption">target rows in the master dataset</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">Daily</span>
+        <span class="stat-caption">snapshot pull cadence</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">CPCB</span>
+        <span class="stat-caption">source · data.gov.in live AQI feed</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-value">Multi-city</span>
+        <span class="stat-caption">monitoring stations across India</span>
+      </div>
+    </div>
+
+    <div class="chart-row">
+      <div class="chart-panel">
+        <div class="chart-heading">
+          <h3>Sample week — illustrative trend</h3>
+          <p>A placeholder view of the daily AQI trend line the merged dataset will support once enough snapshots accumulate.</p>
+        </div>
+        <canvas id="trendChart" width="640" height="220" role="img" aria-label="Illustrative line chart of AQI readings across a sample week"></canvas>
+      </div>
+
+      <div class="chart-panel">
+        <div class="chart-heading">
+          <h3>Sample city comparison</h3>
+          <p>An illustrative snapshot of how average readings might differ across stations.</p>
+        </div>
+        <canvas id="cityChart" width="640" height="220" role="img" aria-label="Illustrative bar chart comparing sample average AQI by city"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <section id="stack" class="section wrap reveal">
+    <h2>Built with</h2>
+    <ul class="stack-list">
+      <li>Python</li>
+      <li>SQL</li>
+      <li>Excel</li>
+      <li>Power BI</li>
+      <li>data.gov.in API</li>
+    </ul>
+  </section>
+
+  <section id="about" class="section wrap reveal">
+    <h2>About</h2>
+    <div class="about-row">
+      <div class="about-avatar" aria-hidden="true">D</div>
+      <div>
+        <h3>Devamma</h3>
+        <p class="section-lede">
+          Data Analytics student in the SURE Trust programme, working on Indian
+          environmental and pollution datasets across Excel, SQL, Python and Power BI.
+        </p>
+        <div class="about-links">
+          <a href="https://github.com/devamma01052004" target="_blank" rel="noopener">GitHub Profile</a>
+          <a href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">Capstone Repo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap footer-row">
+    <p>Devamma · SURE Trust Data Analytics Programme</p>
+    <a href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">github.com/devamma01052004</a>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
