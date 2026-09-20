@@ -18,11 +18,10 @@
     </button>
     <nav class="site-nav" id="siteNav">
       <a href="#overview">Overview</a>
-      <a href="#why">Why it matters</a>
       <a href="#pipeline">Pipeline</a>
       <a href="#data">Data</a>
-      <a href="#about">About</a>
-      <a href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">GitHub</a>
+      <a href="#resources">Resources</a>
+      <a href="https://github.com/Devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">GitHub</a>
     </nav>
   </div>
 </header>
@@ -39,8 +38,8 @@
         master file large enough to analyse real seasonal and regional pollution trends.
       </p>
       <div class="hero-actions">
-        <a class="btn btn-primary" href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">View the repository</a>
-        <a class="btn btn-ghost" href="#pipeline">See how it's built</a>
+        <a class="btn btn-primary" href="https://github.com/Devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">View the repository</a>
+        <a class="btn btn-ghost" href="https://www.data.gov.in/resource/real-time-air-quality-index-various-locations" target="_blank" rel="noopener">View live dataset ↗</a>
       </div>
     </div>
 
@@ -64,27 +63,6 @@
       the live data.gov.in AQI feed on a regular cadence and appending each pull to one
       continuously growing master dataset, rather than relying on a static one-time download.
     </p>
-  </section>
-
-  <section id="why" class="section wrap reveal">
-    <h2>Why it matters</h2>
-    <div class="insight-grid">
-      <div class="insight-card">
-        <svg class="insight-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#4FA8A0" stroke-width="2"/><path d="M12 21l5 5 11-11" fill="none" stroke="#4FA8A0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>No historical archive exists</h3>
-        <p>The public feed only ever shows "right now" — anyone wanting a trend has to build the history themselves.</p>
-      </div>
-      <div class="insight-card">
-        <svg class="insight-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#E8A33D" stroke-width="2"/><path d="M20 11v10l7 4" fill="none" stroke="#E8A33D" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        <h3>Time-series unlocks real analysis</h3>
-        <p>Seasonal spikes, weekday-weekend shifts and city comparisons only surface once enough days are stacked up.</p>
-      </div>
-      <div class="insight-card">
-        <svg class="insight-icon" viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18" fill="none" stroke="#C1543C" stroke-width="2"/><path d="M20 13v9m0 5h.01" fill="none" stroke="#C1543C" stroke-width="2" stroke-linecap="round"/></svg>
-        <h3>Air quality is a public health signal</h3>
-        <p>A clean, growing dataset makes it possible to connect pollutant levels back to real everyday exposure.</p>
-      </div>
-    </div>
   </section>
 
   <section id="pipeline" class="section wrap reveal">
@@ -146,18 +124,37 @@
       <div class="chart-panel">
         <div class="chart-heading">
           <h3>Sample week — illustrative trend</h3>
-          <p>A placeholder view of the daily AQI trend line the merged dataset will support once enough snapshots accumulate.</p>
+          <p>A placeholder view until real daily pulls are merged in. Upload your CSV and I'll swap this for real numbers.</p>
         </div>
         <canvas id="trendChart" width="640" height="220" role="img" aria-label="Illustrative line chart of AQI readings across a sample week"></canvas>
       </div>
 
       <div class="chart-panel">
         <div class="chart-heading">
-          <h3>Sample city comparison</h3>
-          <p>An illustrative snapshot of how average readings might differ across stations.</p>
+          <h3>Sample pollutant mix</h3>
+          <p>An illustrative share of pollutant readings feeding into the AQI calculation.</p>
         </div>
-        <canvas id="cityChart" width="640" height="220" role="img" aria-label="Illustrative bar chart comparing sample average AQI by city"></canvas>
+        <canvas id="pollutantChart" width="640" height="220" role="img" aria-label="Illustrative donut chart of sample pollutant share"></canvas>
       </div>
+    </div>
+  </section>
+
+  <section id="resources" class="section wrap reveal">
+    <h2>Resources</h2>
+    <p class="section-lede">Click through to the live source data or the full project code.</p>
+    <div class="resource-grid">
+      <a class="resource-card" href="https://www.data.gov.in/resource/real-time-air-quality-index-various-locations" target="_blank" rel="noopener">
+        <span class="resource-tag">Dataset</span>
+        <h3>Real-Time AQI — data.gov.in</h3>
+        <p>The live CPCB feed this pipeline pulls from, hourly granularity, hosted on the Open Government Data platform.</p>
+        <span class="resource-link">data.gov.in ↗</span>
+      </a>
+      <a class="resource-card" href="https://github.com/Devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">
+        <span class="resource-tag">Code</span>
+        <h3>Project repository</h3>
+        <p>The full pipeline, cleaning scripts and this site's source, in one place.</p>
+        <span class="resource-link">GitHub ↗</span>
+      </a>
     </div>
   </section>
 
@@ -172,30 +169,12 @@
     </ul>
   </section>
 
-  <section id="about" class="section wrap reveal">
-    <h2>About</h2>
-    <div class="about-row">
-      <div class="about-avatar" aria-hidden="true">D</div>
-      <div>
-        <h3>Devamma</h3>
-        <p class="section-lede">
-          Data Analytics student in the SURE Trust programme, working on Indian
-          environmental and pollution datasets across Excel, SQL, Python and Power BI.
-        </p>
-        <div class="about-links">
-          <a href="https://github.com/devamma01052004" target="_blank" rel="noopener">GitHub Profile</a>
-          <a href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">Capstone Repo</a>
-        </div>
-      </div>
-    </div>
-  </section>
-
 </main>
 
 <footer class="site-footer">
   <div class="wrap footer-row">
     <p>Devamma · SURE Trust Data Analytics Programme</p>
-    <a href="https://github.com/devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">github.com/devamma01052004</a>
+    <a href="https://github.com/Devamma01052004/my-capstone-project-sure-trust" target="_blank" rel="noopener">github.com/Devamma01052004</a>
   </div>
 </footer>
 
