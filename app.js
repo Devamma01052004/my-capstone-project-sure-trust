@@ -30,25 +30,21 @@
   items.forEach(item => observer.observe(item));
 })();
 
-// Hero AQI dial — animates a sample reading in on load.
+// Hero AQI dial
 (function animateDial() {
-  const SAMPLE_AQI = 138;   // illustrative "moderate" reading, scale 0–500
+  const SAMPLE_AQI = 138;
   const MAX_SCALE = 500;
-  const CIRCUMFERENCE = 578; // matches stroke-dasharray in CSS
+  const CIRCUMFERENCE = 578;
 
   const numberEl = document.getElementById('dialNumber');
   const fillEl = document.getElementById('dialFill');
   if (!numberEl || !fillEl) return;
 
   const offset = CIRCUMFERENCE * (1 - SAMPLE_AQI / MAX_SCALE);
-
-  requestAnimationFrame(() => {
-    fillEl.style.strokeDashoffset = offset;
-  });
+  requestAnimationFrame(() => { fillEl.style.strokeDashoffset = offset; });
 
   const duration = 1200;
   const start = performance.now();
-
   function tick(now) {
     const progress = Math.min((now - start) / duration, 1);
     const eased = 1 - Math.pow(1 - progress, 3);
@@ -94,10 +90,8 @@
 
   ctx.beginPath();
   values.forEach((v, i) => {
-    const x = xFor(i);
-    const y = yFor(v);
-    if (i === 0) ctx.moveTo(x, y);
-    else ctx.lineTo(x, y);
+    const x = xFor(i), y = yFor(v);
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
   });
   ctx.strokeStyle = '#E8A33D';
   ctx.lineWidth = 2.5;
@@ -117,14 +111,12 @@
   ctx.fillStyle = '#8FA396';
   ctx.font = '11px "IBM Plex Mono", monospace';
   ctx.textAlign = 'center';
-  days.forEach((d, i) => {
-    ctx.fillText(d, xFor(i), cssHeight - 8);
-  });
+  days.forEach((d, i) => ctx.fillText(d, xFor(i), cssHeight - 8));
 })();
 
-// Sample city comparison bar chart — illustrative only.
-(function drawCityChart() {
-  const canvas = document.getElementById('cityChart');
+// Sample pollutant mix donut — illustrative only.
+(function drawPollutantChart() {
+  const canvas = document.getElementById('pollutantChart');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
@@ -135,41 +127,37 @@
   canvas.height = cssHeight * dpr;
   ctx.scale(dpr, dpr);
 
-  const cities = ['Delhi', 'Mumbai', 'Bengaluru', 'Chennai', 'Kolkata'];
-  const values = [212, 118, 76, 94, 156];
+  const segments = [
+    { label: 'PM2.5', value: 38, color: '#C1543C' },
+    { label: 'PM10', value: 27, color: '#E8A33D' },
+    { label: 'NO2', value: 15, color: '#4FA8A0' },
+    { label: 'O3', value: 12, color: '#6FBFB6' },
+    { label: 'Other', value: 8, color: '#3A4A42' }
+  ];
+  const total = segments.reduce((s, x) => s + x.value, 0);
 
-  const padding = { top: 20, right: 20, bottom: 30, left: 20 };
-  const w = cssWidth - padding.left - padding.right;
-  const h = cssHeight - padding.top - padding.bottom;
-  const maxVal = Math.max(...values) * 1.15;
-  const barGap = 18;
-  const barWidth = (w - barGap * (values.length - 1)) / values.length;
+  const cx = cssWidth / 2 - 70, cy = cssHeight / 2, r = 78, inner = 46;
+  let angle = -Math.PI / 2;
 
-  ctx.strokeStyle = 'rgba(143, 163, 150, 0.18)';
-  ctx.lineWidth = 1;
-  for (let g = 0; g <= 3; g++) {
-    const gy = padding.top + (h / 3) * g;
+  segments.forEach(seg => {
+    const slice = (seg.value / total) * Math.PI * 2;
     ctx.beginPath();
-    ctx.moveTo(padding.left, gy);
-    ctx.lineTo(padding.left + w, gy);
-    ctx.stroke();
-  }
-
-  const colors = ['#C1543C', '#E8A33D', '#4FA8A0', '#4FA8A0', '#E8A33D'];
-
-  values.forEach((v, i) => {
-    const barH = (v / maxVal) * h;
-    const x = padding.left + i * (barWidth + barGap);
-    const y = padding.top + h - barH;
-    ctx.fillStyle = colors[i];
-    ctx.fillRect(x, y, barWidth, barH);
+    ctx.arc(cx, cy, r, angle, angle + slice);
+    ctx.arc(cx, cy, inner, angle + slice, angle, true);
+    ctx.closePath();
+    ctx.fillStyle = seg.color;
+    ctx.fill();
+    angle += slice;
   });
 
-  ctx.fillStyle = '#8FA396';
   ctx.font = '11px "IBM Plex Mono", monospace';
-  ctx.textAlign = 'center';
-  cities.forEach((c, i) => {
-    const x = padding.left + i * (barWidth + barGap) + barWidth / 2;
-    ctx.fillText(c, x, cssHeight - 8);
+  ctx.textAlign = 'left';
+  const legendX = cssWidth - 150;
+  segments.forEach((seg, i) => {
+    const ly = 30 + i * 24;
+    ctx.fillStyle = seg.color;
+    ctx.fillRect(legendX, ly - 9, 10, 10);
+    ctx.fillStyle = '#E8EDE9';
+    ctx.fillText(`${seg.label}  ${seg.value}%`, legendX + 16, ly);
   });
 })();
